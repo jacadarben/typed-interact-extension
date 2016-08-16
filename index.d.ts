@@ -2,6 +2,7 @@ declare function initExtensions(extensionName: string, initCallback: (app: Inter
 
 declare namespace Interact {
     export interface IApplication {
+        backButton?: JQuery;
         channelType: string;
         constants: any;
         extension: any;
