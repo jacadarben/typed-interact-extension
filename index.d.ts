@@ -29,7 +29,7 @@ declare var NAVIGATION: {
     TERMINATED_BY_USER: string;
 }
 
-declare interface HEADERS {
+declare var HEADERS {
 	SERVER_VERSION: string;
 	PROTOCOL_VERSION: string;
 	APPLICATION_VERSION: string;
