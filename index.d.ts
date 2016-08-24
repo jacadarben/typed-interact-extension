@@ -1,3 +1,7 @@
+declare interface IKeyValueObject<T> {
+    [key: string]: T
+}
+
 declare function initExtensions(extensionName: string, initCallback: (app: Interact.IApplication) => void): void;
 declare var mobilewebappInstance: Interact.IApplication;
 declare var NAVIGATION: {
@@ -95,39 +99,61 @@ declare namespace Interact {
             tenant: string;
             theme: string;
             userId: string;
-            allocatePhoneNumber($group$$: string, $success$$: (arg: any) => void): any;
+            allocatePhoneNumber($group$$: string, $success$$: (arg: any) => void): void;
             buildUrl($scheme$$: "http" | "https", $server$$: string, $port$$: number): string;
-            checkChatAvailability($queue$$: string, $availabilityHandler$$: (arg: any) => void): any;
-            createInstance($renderFunction$$: Function, $clientActionsFunction$$: Function[]): any;
-            createInstanceForHiddens(): any;
-            freePhoneNumber($phoneNum$$: string, $success$$: (arg: any) => void): any;
-            getAgentAppSettings($successCallback$$: (arg: any) => void): any;
-            getAllVars($success$$: (arg: any[]) => void, $fail$$: (arg: any) => void): any;
-            getCallAvailablity($appkey$$: string, $cb$$: (arg: any) => void): any;
-            getChatMessages($chatMessageHandler$$: (arg: any) => void): any;
-            getInteractionList($loginDone$$: any): any;
-            getVar($varname$$: string, $success$$: (value: any) => void, $fail$$: (xhr: JQueryXHR) => void): void;
-            hideProgressBar(): any;
-            initImei(): any;
-            notifyServer($navType$$: any, $params$$: any, $success$$: (arg: any) => void, $failure$$: (arg: any) => void): any;
-            performNavigation($navType$$: string, $params$$: any, $variables$$: any[]): any;
-            requestChat($queue$$: string, $chatRequestHandler$$: (arg: any) => void): any;
-            restore(): any;
-            retrieveEWT($sender$$: string, $queueName$$: string, $retrieveEWTSucess$$: (arg: any) => void, $retrieveEWTFailure$$: (arg: any) => void): any;
-            retryLastRequest(): any;
-            save(): any;
-            saveRequest($func$$: Function, $argsArray$$: any[]): any;
-            sendChatMessage($text$$: string, $messageSentHandler$$: (arg: any) => void): any;
-            sendContactUsEmail($name$$: string, $phoneNumber$$: string, $emailFrom$$: string, $message$$: string, $success$$: (arg: any) => void): any;
-            setRequestHeader($xhr$$: JQueryXHR): any;
+            checkChatAvailability($queue$$: string, $availabilityHandler$$: (arg: any) => void): void;
+            createInstance($renderFunction$$: Function, $clientActionsFunction$$: Function[]): void;
+            createInstanceForHiddens(): void;
+            freePhoneNumber($phoneNum$$: string, $success$$: (arg: any) => void): void;
+            getAgentAppSettings($successCallback$$: (appSettings: any) => void): void;
+            getAllVars($success$$: (variables: IKeyValueObject<any>) => void, $fail$$?: () => void): void;
+            getCallAvailablity($appkey$$: string, $cb$$: (callAvailability: any) => void): void;
+            getChatMessages($chatMessageHandler$$: (chatMessage: any) => void): void;
+            getInteractionList($loginDone$$: (interactionList: IInteractionList) => void): void;
+            getVar($varname$$: string, $success$$: (value: any) => void, $fail$$?: () => void): void;
+            hideProgressBar(): void;
+            initImei(): void;
+            notifyServer($navType$$: string, $params$$: any, $success$$: () => void, $failure$$: () => void): void;
+            performNavigation($navType$$: string, $params$$?: any, $variables$$?: IKeyValueObject<any>): void;
+            requestChat($queue$$: string, $chatRequestHandler$$: (chatResponse: any) => void): void;
+            restore(): void;
+            retrieveEWT($sender$$: string, $queueName$$: string, $retrieveEWTSucess$$: ($sender$$: string, ewtMessage: any) => void, $retrieveEWTFailure$$: ($sender$$: string, ewt: any) => void): any;
+            retryLastRequest(): void;
+            save(): void;
+            saveRequest($func$$: Function, $argsArray$$: any[]): void;
+            sendChatMessage($text$$: string, $messageSentHandler$$: () => void): void;
+            sendContactUsEmail($name$$: string, $phoneNumber$$: string, $emailFrom$$: string, $message$$: string, $success$$: () => void): void;
+            setRequestHeader($xhr$$: JQueryXHR): void;
             setVar($varname$$: string, $value$$: any): void;
-            showProgressBar($message$$: string): any;
-            terminateChat($terminatedHandler$$: (arg: any) => void): any;
-            uploadResource($blob$$: Blob, $elementId$$: string, $file_local_path$$: string, $callback$$: (arg: any) => void, $PhotosToUpload$$: any[], $photoRef$$: string): any;
+            showProgressBar($message$$?: string): void;
+            terminateChat($terminatedHandler$$: () => void): void;
+            uploadResource($blob$$: Blob, $elementId$$: string, $file_local_path$$: string, $callback$$: () => void, $PhotosToUpload$$: any[], $photoRef$$: string): FormData;
         }
 
         interface IErrorHandler {
             app: IApplication;
+        }
+
+        export interface IInteractionList {
+            resources: IResource;
+        }
+
+        interface IResource {
+            spaces: ISpace[];
+            pageTitle: string;
+        }
+
+        interface ISpace {
+            spaceMessage?: string;
+            spaceInteractions?: ISpaceInteraction[];
+            subSpaces?: ISpace[];
+            spaceTitle?: string;
+        }
+
+        interface ISpaceInteraction {
+            id: string;
+            interactionName: string;
+            description: string;
         }
     }
 
