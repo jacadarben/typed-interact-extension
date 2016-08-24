@@ -182,6 +182,8 @@ declare namespace Interact {
 
         interface IErrorHandler {
             app: IApplication;
+            $displayError($responseError$$: string): void;
+            onError($xhr$$: JQueryXHR, $status$$: string): void;
         }
 
         export interface IInteractionList {
