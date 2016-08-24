@@ -1,4 +1,29 @@
 declare function initExtensions(extensionName: string, initCallback: (app: Interact.IApplication) => void): void;
+declare var mobilewebappInstance: Interact.IApplication;
+declare var NAVIGATION: {
+    BACK_FROM_hELP: string;
+    BACK_TO_COVER_APP: string;
+    BACK_TO_LOGIN: string;
+    CALLBACK_REQUEST: string;
+    CALL_DIALED: string;
+    CALL_INITIATED: string;
+    CALL_TRANSFER: string;
+    CURRENT: string;
+    FINISH: string;
+    HELP: string;
+    JUMP_TO: string;
+    LOGIN_REDIRECT: string;
+    MAILTO_REQUEST: string;
+    NEXT: string;
+    NONE: string;
+    PREVIOUS: string;
+    RELOAD_ELEMENT: string;
+    RELOAD_INSTANCE: string;
+    RETRY: string;
+    SAVE_UNFINISHED: string;
+    START_OVER: string;
+    TERMINATED_BY_USER: string;
+}
 
 declare namespace Interact {
     export interface IApplication {
@@ -85,7 +110,7 @@ declare namespace Interact {
             hideProgressBar(): any;
             initImei(): any;
             notifyServer($navType$$: any, $params$$: any, $success$$: (arg: any) => void, $failure$$: (arg: any) => void): any;
-            performNavigation($navType$$: any, $params$$: any, $variables$$: any[]): any;
+            performNavigation($navType$$: string, $params$$: any, $variables$$: any[]): any;
             requestChat($queue$$: string, $chatRequestHandler$$: (arg: any) => void): any;
             restore(): any;
             retrieveEWT($sender$$: string, $queueName$$: string, $retrieveEWTSucess$$: (arg: any) => void, $retrieveEWTFailure$$: (arg: any) => void): any;
@@ -95,7 +120,7 @@ declare namespace Interact {
             sendChatMessage($text$$: string, $messageSentHandler$$: (arg: any) => void): any;
             sendContactUsEmail($name$$: string, $phoneNumber$$: string, $emailFrom$$: string, $message$$: string, $success$$: (arg: any) => void): any;
             setRequestHeader($xhr$$: JQueryXHR): any;
-            setVar($varname$$: string, $value$$: any): any;
+            setVar($varname$$: string, $value$$: any): void;
             showProgressBar($message$$: string): any;
             terminateChat($terminatedHandler$$: (arg: any) => void): any;
             uploadResource($blob$$: Blob, $elementId$$: string, $file_local_path$$: string, $callback$$: (arg: any) => void, $PhotosToUpload$$: any[], $photoRef$$: string): any;
