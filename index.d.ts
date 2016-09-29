@@ -84,9 +84,9 @@ declare namespace Interact {
         backButton?: JQuery;
         channelType: string;
         constants: any;
-        extension: any;
-        mPage: any;
-        mode: any;
+        extension: Application.IExtensions;
+        mPage?: JQuery;
+        mode?: any;
         nextButton?: JQuery;
         options: Application.IOptions;
         previousPage?: JQuery;
@@ -263,7 +263,11 @@ declare namespace Interact {
     }
 
     namespace Application {
-        type eventTypeString = "loaded" | "pageRenderer";
+        type eventTypeString = "loaded" | "pageRenderer" |
+                               "callbackPageRenderer" |"chatPageRenderer" |
+                               "contactUsPageRenderer" | "pageFooterRenderer" |
+                               "pageHeaderRenderer" | "pageRenderer" |
+                               "sendEmailPageRenderer" | "uploadPhotosMatrixRenderer";
 
         interface IOptions {
             mode: string;
@@ -403,6 +407,18 @@ declare namespace Interact {
         interface ITranslate {
             dictionary: { [languangeCode: string]: IMapping }
             strings: IMapping;
+        }
+
+        interface IExtensions {
+            callbackPageRenderer: ((ctx: Extensions.IExtensionContext, page: JQuery) => JQuery)[];
+            chatPageRenderer: ((ctx: Extensions.IExtensionContext, page: JQuery) => JQuery)[];
+            contactUsPageRenderer: ((ctx: Extensions.IExtensionContext, page: JQuery) => JQuery)[];
+            loaded: ((ctx: Extensions.IExtensionContext, page: JQuery) => void)[];
+            pageFooterRenderer: ((ctx: Extensions.IExtensionContext, page: JQuery) => JQuery)[];
+            pageHeaderRenderer: ((ctx: Extensions.IExtensionContext, page: JQuery) => JQuery)[];
+            pageRenderer: ((ctx: Extensions.IExtensionContext, page: JQuery) => JQuery)[];
+            sendEmailPageRenderer: ((ctx: Extensions.IExtensionContext, page: JQuery) => JQuery)[];
+            uploadPhotosMatrixRenderer: ((ctx: Extensions.IExtensionContext, page: JQuery) => JQuery)[];
         }
     }
 }

@@ -1,5 +1,7 @@
 {
   "private": true,
+  "name": "typed-interact-extension",
+  "version": "1.1.0",
   "scripts": {
     "build": "echo building... && typings bundle --global -o out/index.d.ts",
     "lint": "echo linting... && tslint \"**/*.ts\" -e \"source/**\" -e \"source-test/**\" -e \"out/**\" -e \"node_modules/**\" -e \"typings/**\"",
