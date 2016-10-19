@@ -2,8 +2,28 @@ declare interface IKeyValueObject<T> {
     [key: string]: T
 }
 
+declare class ErrorHandler {
+    constructor($app$$: Interact.IApplication);
+    public $displayError($responseError$$: any): any;
+    public onError($xhr$$: XMLHttpRequest, $status$$: any): any;
+    _displayError($responseError$$: any): any;
+    _getActionHandler($actionUrl$$: string, $errorResponse$$: any): any;
+    _getCommunicationError(): any;
+    _getCookiesDisabledError(): any;
+    _getErrorHandler($xhr$$: XMLHttpRequest): any;
+    _getLinkExpiredError(): any;
+    _getNonVisualInteractionError(): any;
+    _handleAccessTokenError($xhr$$: XMLHttpRequest): any;
+    _handleApplicationDeniedError($JSCompiler_object_inline_responseError_0_xhr$$: any): any;
+    _handleBadCredetialsError($xhr$$: XMLHttpRequest): any;
+    _handleGeneralError($xhr$$: XMLHttpRequest): any;
+    _handleTrialExpiredError($xhr$$: XMLHttpRequest): any;
+    _handleUrlTokenError($xhr$$: XMLHttpRequest): any;
+}
+
 declare function initExtensions(extensionName: string, initCallback: (app: Interact.IApplication) => void): void;
 declare var mobilewebappInstance: Interact.IApplication;
+
 declare var NAVIGATION: {
     BACK_FROM_hELP: string;
     BACK_TO_COVER_APP: string;
@@ -264,10 +284,10 @@ declare namespace Interact {
 
     namespace Application {
         type eventTypeString = "loaded" | "pageRenderer" |
-                               "callbackPageRenderer" |"chatPageRenderer" |
-                               "contactUsPageRenderer" | "pageFooterRenderer" |
-                               "pageHeaderRenderer" | "pageRenderer" |
-                               "sendEmailPageRenderer" | "uploadPhotosMatrixRenderer";
+            "callbackPageRenderer" | "chatPageRenderer" |
+            "contactUsPageRenderer" | "pageFooterRenderer" |
+            "pageHeaderRenderer" | "pageRenderer" |
+            "sendEmailPageRenderer" | "uploadPhotosMatrixRenderer";
 
         interface IOptions {
             mode: string;
