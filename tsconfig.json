@@ -1,13 +1,20 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "outDir": "out",
-    "target": "es5"
-  },
-  "exclude": [
-    "node_modules",
-    "out",
-    "source"
-  ]
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es5",
+        "inlineSources": true,
+        "inlineSourceMap": true,
+        "pretty": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+        "outDir": "out",
+        "declaration": true,
+        "removeComments": false
+    },
+    "exclude": [
+        "out",
+        "node_modules"
+    ]
 }
