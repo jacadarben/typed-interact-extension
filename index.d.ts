@@ -112,7 +112,9 @@ declare namespace Interact {
         previousPage?: JQuery;
         protocolManager: ProtocolManager.IProtocolManager;
         translator: Application.ITranslate;
-        registerExtension($type$$: Application.eventTypeString, $fn$$: (ctx: Extensions.IExtensionContext, page: JQuery) => JQuery | void): void;
+        registerExtension($type$$: Application.rendererEventTypeString, $fn$$: (ctx: Extensions.IExtensionContext, page: JQuery) => JQuery): void;
+        registerExtension($type$$: "loaded", $fn$$: (ctx: Extensions.IExtensionContext, page: JQuery) => void): void;
+        registerExtension($type$$: "onError", $fn$$: (ctx: Extensions.IErrorContext) => void): void;
         changePage($target$$: any, $transition$$: any, $dir_direction$$: any, $addToPageContainer$$: any): void;
         checkForPendingPhotos(): any;
         closeSideController($page$$: any, $transitionType$$: any, $transitionDirection$$: any): void;
@@ -278,12 +280,25 @@ declare namespace Interact {
             getPage(): Paging.IPage;
             getVariable(varName: string, success?: (value: any) => void, fail?: (xhr: JQueryXHR) => void): any;
             setVariable(varName: string, value: any): void;
+        }
 
+        interface IErrorContext {
+            alert: {
+                alertTitle: string;
+                alertMessageBody: string;
+                alertButtons: {
+                    alertButtonClientAction: {
+                        action: string;
+                    };
+                    alertButtonTitle: string;
+                }[];
+            }
+            errorId: string;
         }
     }
 
     namespace Application {
-        type eventTypeString = "loaded" | "pageRenderer" |
+        type rendererEventTypeString = "pageRenderer" |
             "callbackPageRenderer" | "chatPageRenderer" |
             "contactUsPageRenderer" | "pageFooterRenderer" |
             "pageHeaderRenderer" | "pageRenderer" |
