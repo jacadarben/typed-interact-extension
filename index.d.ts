@@ -113,7 +113,7 @@ declare namespace Interact {
         protocolManager: ProtocolManager.IProtocolManager;
         translator: Application.ITranslate;
         registerExtension($type$$: Application.rendererEventTypeString, $fn$$: (ctx: Extensions.IExtensionContext, page: JQuery) => JQuery): void;
-        registerExtension($type$$: "addHttpInterceptor", $fn$$: () => Application.IRequestInterceptor | undefined): void;
+        registerExtension($type$$: "addHttpInterceptor", $fn$$: () => Application.Intercept.IRequestInterceptor | undefined): void;
         registerExtension($type$$: "loaded", $fn$$: (ctx: Extensions.IExtensionContext, page: JQuery) => void): void;
         registerExtension($type$$: "onError", $fn$$: (ctx: Extensions.IErrorContext) => void): void;
         changePage($target$$: any, $transition$$: any, $dir_direction$$: any, $addToPageContainer$$: any): void;
@@ -305,9 +305,22 @@ declare namespace Interact {
             "pageHeaderRenderer" | "pageRenderer" |
             "sendEmailPageRenderer" | "uploadPhotosMatrixRenderer";
 
-        interface IRequestInterceptor {
-            request(req: any): void;
+        export namespace Intercept {
+            export interface IRequest {
+                headers: { [key: string]: string };
+                path: string;
+                pathParams: { [key: string]: string };
+                queryParams: { [key: string]: string };
+                method: string;
+                data: any;
+                url: string;
+            }
+
+            interface IRequestInterceptor {
+                request(req: IRequest): IRequest;
+            }
         }
+
 
         interface IOptions {
             mode: string;
