@@ -306,18 +306,30 @@ declare namespace Interact {
             "sendEmailPageRenderer" | "uploadPhotosMatrixRenderer";
 
         export namespace Intercept {
-            export interface IRequest {
+            export interface IRequestOptions {
                 headers: { [key: string]: string };
                 path: string;
                 pathParams: { [key: string]: string };
                 queryParams: { [key: string]: string };
                 method: string;
-                data: any;
+                data: string;
                 url: string;
             }
 
+            export interface IResponseOptions {
+                config: any;
+                headers: { [key: string]: string };
+                status: number;
+                statusText: string;
+                data: string;
+                xhr: any
+            }
+
             interface IRequestInterceptor {
-                request(req: IRequest): IRequest;
+                request(req: IRequestOptions): IRequestOptions;
+                requestError(req: IRequestOptions): IRequestOptions;
+                response(req: IResponseOptions): IResponseOptions;
+                responseError(req: IResponseOptions): IResponseOptions;
             }
         }
 
